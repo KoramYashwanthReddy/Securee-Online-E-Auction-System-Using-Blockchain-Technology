@@ -1,0 +1,164 @@
+<style>
+    .seller-nav-shell {
+        position: sticky;
+        top: 0;
+        z-index: 1040;
+        padding: 14px 16px 0;
+    }
+
+    .seller-nav {
+        width: min(100%, 1320px);
+        margin: 0 auto 18px;
+        padding: 14px 18px;
+        border-radius: 20px;
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.24);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: #e2e8f0;
+    }
+
+    html.light .seller-nav {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(15, 23, 42, 0.08);
+        color: #0f172a;
+        box-shadow: 0 18px 48px rgba(148, 163, 184, 0.2);
+    }
+
+    .seller-nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .seller-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+    }
+
+    .seller-brand img {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+        flex: 0 0 auto;
+    }
+
+    .seller-brand span {
+        font-size: 18px;
+    }
+
+    .seller-nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .seller-nav-link,
+    .seller-nav-logout {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .seller-nav-link {
+        color: inherit;
+        background: transparent;
+    }
+
+    .seller-nav-link:hover,
+    .seller-nav-link.active {
+        background: rgba(99, 102, 241, 0.14);
+        color: #4f46e5;
+        transform: translateY(-1px);
+    }
+
+    .seller-nav-logout {
+        background: linear-gradient(135deg, #4f46e5, #4338ca);
+        color: #fff;
+    }
+
+    .seller-nav-logout:hover {
+        transform: translateY(-1px);
+        color: #fff;
+    }
+
+    .seller-nav-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: inherit;
+        opacity: 0.82;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .seller-nav-meta strong {
+        opacity: 1;
+    }
+
+    body > .navbar-top,
+    body > header.bg-white {
+        display: none !important;
+    }
+
+    @media (max-width: 992px) {
+        .seller-nav-row {
+            align-items: flex-start;
+        }
+
+        .seller-nav-links {
+            justify-content: flex-start;
+        }
+    }
+</style>
+<div class="seller-nav-shell">
+    <div class="seller-nav">
+        <div class="seller-nav-row">
+            <a class="seller-brand" href="{{ url_for('SellerScreenPage') }}">
+                <img src="{{ url_for('static', filename='assets/images/logo.svg') }}" alt="Bidzone">
+                <span>Bidzone Seller</span>
+            </a>
+            {% if session.get('seller') %}
+            <div class="seller-nav-links">
+                <a class="seller-nav-link {% if request.endpoint in ['SellerScreen', 'SellerScreenPage', 'SellerEarnings', 'SellerAnalytics'] %}active{% endif %}" href="{{ url_for('SellerScreenPage') }}">Dashboard</a>
+                <a class="seller-nav-link {% if request.endpoint in ['AddProduct', 'AddProductPage'] %}active{% endif %}" href="{{ url_for('AddProduct') }}">Add Product</a>
+                <a class="seller-nav-link {% if request.endpoint in ['ViewBid', 'ViewBidPage'] %}active{% endif %}" href="{{ url_for('ViewBid') }}">View Bids</a>
+                <a class="seller-nav-link {% if request.endpoint == 'Profile' %}active{% endif %}" href="{{ url_for('Profile', role='Seller') }}">Profile</a>
+                <a class="seller-nav-link {% if request.endpoint == 'EditProfile' %}active{% endif %}" href="{{ url_for('EditProfile') }}">Edit Profile</a>
+            </div>
+            <div class="seller-nav-meta">
+                <span><strong>{{ session.get('seller') }}</strong></span>
+                <a class="seller-nav-logout" href="{{ url_for('SellerLogout') }}">Logout</a>
+            </div>
+            {% else %}
+            <div class="seller-nav-links">
+                <a class="seller-nav-link {% if request.endpoint in ['SellerLogin', 'SellerLoginPage'] %}active{% endif %}" href="{{ url_for('SellerLoginPage') }}">Login</a>
+                <a class="seller-nav-link {% if request.endpoint in ['SellerSignup', 'SellerSignupPage'] %}active{% endif %}" href="{{ url_for('SellerSignupPage') }}">Signup</a>
+            </div>
+            <div class="seller-nav-meta">
+                <span><strong>Guest</strong></span>
+                <a class="seller-nav-logout" href="{{ url_for('SellerLoginPage') }}">Sign In</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Online auction and bidding HTML template</title>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/swiper.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        .detail-section {
+            padding: 18px 16px 84px;
+            --detail-bg: radial-gradient(circle at top, rgba(99, 102, 241, 0.16), transparent 34%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+            --detail-card-bg: rgba(255, 255, 255, 0.92);
+            --detail-card-border: rgba(15, 23, 42, 0.08);
+            --detail-card-shadow: 0 28px 80px rgba(148, 163, 184, 0.28);
+            --detail-text: #0f172a;
+            --detail-muted: #475569;
+            --detail-accent: #4f46e5;
+            --detail-surface: rgba(15, 23, 42, 0.03);
+            --detail-border: rgba(100, 116, 139, 0.18);
+            --detail-pill-bg: rgba(99, 102, 241, 0.1);
+            background: var(--detail-bg);
+        }
+
+        html.dark .detail-section {
+            --detail-bg: radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 34%), linear-gradient(135deg, #0f172a 0%, #111827 50%, #1e293b 100%);
+            --detail-card-bg: rgba(15, 23, 42, 0.9);
+            --detail-card-border: rgba(255, 255, 255, 0.1);
+            --detail-card-shadow: 0 32px 90px rgba(2, 6, 23, 0.34);
+            --detail-text: #e2e8f0;
+            --detail-muted: #cbd5e1;
+            --detail-accent: #818cf8;
+            --detail-surface: rgba(255, 255, 255, 0.04);
+            --detail-border: rgba(148, 163, 184, 0.18);
+            --detail-pill-bg: rgba(99, 102, 241, 0.14);
+        }
+
+        .detail-shell {
+            display: flex;
+            justify-content: center;
+        }
+
+        .detail-card {
+            width: min(100%, 1240px);
+            margin-top: 10px;
+            padding: 34px;
+            border-radius: 24px;
+            background: var(--detail-card-bg);
+            border: 1px solid var(--detail-card-border);
+            box-shadow: var(--detail-card-shadow);
+            color: var(--detail-text);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .detail-eyebrow {
+            margin: 0 0 10px;
+            color: var(--detail-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .detail-title {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .detail-subtitle {
+            margin: 12px 0 0;
+            color: var(--detail-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 860px;
+        }
+
+        .detail-stats {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .detail-stat {
+            padding: 18px;
+            border-radius: 18px;
+            background: var(--detail-surface);
+            border: 1px solid var(--detail-border);
+        }
+
+        .detail-stat strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--detail-text);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .detail-stat span {
+            color: var(--detail-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .detail-panel {
+            margin-top: 24px;
+            border-radius: 20px;
+            background: var(--detail-surface);
+            border: 1px solid var(--detail-border);
+            overflow: hidden;
+        }
+
+        .detail-panel-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--detail-border);
+            background: rgba(99, 102, 241, 0.06);
+        }
+
+        .detail-panel-head h3 {
+            margin: 0;
+            color: var(--detail-text);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .detail-panel-head span {
+            color: var(--detail-muted);
+            font-size: 13px;
+        }
+
+        .detail-panel-body {
+            padding: 20px;
+            color: var(--detail-text);
+        }
+
+        .detail-output {
+            overflow-x: auto;
+            border-radius: 16px;
+        }
+
+        .detail-output table {
+            width: 100%;
+            min-width: 720px;
+            border-collapse: collapse;
+            color: var(--detail-text);
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--detail-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        html.dark .detail-output table {
+            background: rgba(15, 23, 42, 0.72);
+        }
+
+        .detail-note {
+            margin-top: 16px;
+            color: var(--detail-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .detail-panel-body table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .detail-panel-body table th,
+        .detail-panel-body table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--detail-border);
+            text-align: left;
+        }
+
+        .detail-panel-body table th {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--detail-text);
+            font-weight: 800;
+        }
+
+        .detail-panel-body table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        @media (max-width: 992px) {
+            .detail-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .detail-card {
+                padding: 22px;
+                border-radius: 20px;
+            }
+        }
+    </style>
+        
+</head>
+
+<body>
+    {% include 'admin_nav.html' %}
+    <!-- Preloader Start -->
+    <div class="preloader bg-light" id="preloader">
+        <span class="preloader-inner"></span>
+    </div>
+    <!-- Preloader End -->
+    <!-- Back-to-top Start -->
+    <a href="javascript:void(0)" class="back-to-top"><i class="fa-solid fa-up-long"></i></a>
+    <!-- Back-to-top End -->
+    <!-- Main Content Start !-->
+    <main id="main-content" class="position-relative">
+        <section class="banner overflow-hidden" id="current-image" style="background-image: url();">
+            <div class="container position-relative">
+                <div class="row align-items-center justify-content-center gy-4">
+                    <div class="col-xl-7">
+                        <div class="banner-left">
+                            <h1 class="banner-title">Join exclusive auction & Get the
+                                finest.</h1>
+                            
+                        </div>
+                    </div>
+                    <div class="col-11 col-md-8 col-xl-5">
+                        <div class="swiper banner-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-1.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">vintage luxurious house</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-2.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Final match 2022 Shuttlecock and racket</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-3.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">16th-century culverin cannon</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-4.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Vintage Hand Carved Wood Camel Stand </a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-13.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Most famous Skirt piece of celebrities</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <div class="container">
+                <div class="detail-shell">
+                    <div class="detail-card">
+                        <p class="detail-eyebrow">Transaction Ledger</p>
+                        <h1 class="detail-title">View Transaction</h1>
+                        <p class="detail-subtitle">Review completed auction settlements, payment records, and platform outcomes from a secure enterprise reporting panel designed for fast administrative review.</p>
+                        <div class="detail-stats">
+                            <div class="detail-stat">
+                                <strong>Settlement History</strong>
+                                <span>Track completed bids and payment states from a unified ledger view.</span>
+                            </div>
+                            <div class="detail-stat">
+                                <strong>Audit Ready</strong>
+                                <span>Maintain a clear operational record for reporting and compliance review.</span>
+                            </div>
+                            <div class="detail-stat">
+                                <strong>Fast Lookup</strong>
+                                <span>Use the embedded data panel to inspect transactions without leaving the page.</span>
+                            </div>
+                            <div class="detail-stat">
+                                <strong>Theme Aware</strong>
+                                <span>Enterprise visuals adapt automatically to light and dark modes.</span>
+                            </div>
+                        </div>
+                        <div class="detail-panel">
+                            <div class="detail-panel-head">
+                                <h3>Live Transaction Data</h3>
+                                <span>Dynamic ledger output</span>
+                            </div>
+                            <div class="detail-panel-body">
+                                {% if data %}
+                                <div class="detail-output">{{ data|safe }}</div>
+                                {% else %}
+                                <div class="detail-output">No transaction data available</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="detail-note">Use the top navigation or return to the admin workspace to continue managing the platform.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <!-- Footer End !-->
+
+    <!-- JavaScript Libraries -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/swiper.min.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+    <script>
+        var swiper = new Swiper(".categorySwiper", {
+            spaceBetween: 32,
+            autoplay: {
+                delay: 1000,
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 4,
+                },
+                1400: {
+                    slidesPerView: 6,
+                },
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        const mySwiper = new Swiper('.banner-slider', {
+            effect: "cards",
+            grabCursor: true,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 2000,
+            },
+        });
+
+
+        var x = 0;
+        var y = 1;
+        var currentActiveSlide = $('.swiper-slide-active .banner-card img').attr('src');
+        $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+
+        mySwiper.on('slideChange', function (e) {
+            x = e.activeIndex;
+            if (y <= x) {
+                var currentActiveSlide = $('.swiper-slide-next .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            else {
+                var currentActiveSlide = $('.swiper-slide-prev .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            y = x;
+        });
+
+
+    </script>
+</body>
+
+</html>

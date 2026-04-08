@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Profile</title>
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        body { margin:0; font-family: Arial, Helvetica, sans-serif; }
+        .wrap {
+            min-height: 100vh;
+            padding: 28px 16px 84px;
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.14), transparent 36%), linear-gradient(135deg, #0f172a 0%, #111827 48%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+        html.light .wrap {
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 38%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+            color: #0f172a;
+        }
+        .shell { width:min(100%, 1140px); margin:0 auto; }
+        .cardx {
+            padding: 32px 28px;
+            border-radius: 24px;
+            background: rgba(15,23,42,.72);
+            border: 1px solid rgba(255,255,255,.12);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 28px 80px rgba(15,23,42,.44);
+        }
+        html.light .cardx { background: rgba(255,255,255,.86); color: #0f172a; }
+        .eyebrow { color:#6366f1; text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:800; margin-bottom:12px; }
+        h1 { margin:0; font-size: clamp(28px, 4vw, 42px); line-height:1.1; }
+        p.sub { margin:10px 0 0; max-width: 760px; line-height:1.6; opacity:.78; }
+        .profile-grid {
+            display:grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap:16px;
+            margin:22px 0;
+        }
+        .pill {
+            padding:18px;
+            border-radius:18px;
+            border:1px solid rgba(148,163,184,.18);
+            background: rgba(255,255,255,.05);
+        }
+        html.light .pill { background: rgba(15,23,42,.03); }
+        .label { display:block; opacity:.72; font-size:13px; margin-bottom:8px; }
+        .value { display:block; font-size: 30px; font-weight:800; letter-spacing:-.03em; }
+        .subvalue { display:block; margin-top:6px; opacity:.72; font-size:13px; }
+        .table-wrap { overflow-x:auto; border-radius:20px; border:1px solid rgba(148,163,184,.18); }
+        table { width:100%; border-collapse:collapse; min-width: 560px; }
+        th, td { padding:14px 16px; text-align:left; border-bottom:1px solid rgba(148,163,184,.18); }
+        th { background: rgba(99,102,241,.08); font-size:14px; font-weight:800; }
+        tr:last-child td { border-bottom:0; }
+        .links { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+        .links a { text-decoration:none; color:inherit; font-weight:700; padding:10px 14px; border-radius:999px; border:1px solid rgba(99,102,241,.18); background: rgba(99,102,241,.1); }
+        @media (max-width: 992px) {
+            .profile-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 576px) {
+            .profile-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    {% include 'role_nav.html' %}
+    <div class="wrap">
+        <div class="shell">
+            <div class="cardx">
+                <div class="eyebrow">User Profile</div>
+                <h1>{{ profile.username }}</h1>
+                <p class="sub">A quick overview of your account activity, role, and blockchain auction participation.</p>
+
+                <div class="profile-grid">
+                    <div class="pill">
+                        <span class="label">Role</span>
+                        <span class="value">{{ profile.role }}</span>
+                    </div>
+                    <div class="pill">
+                        <span class="label">Total Bids</span>
+                        <span class="value">{{ profile.total_bids }}</span>
+                    </div>
+                    <div class="pill">
+                        <span class="label">Auctions Won</span>
+                        <span class="value">{{ profile.auctions_won }}</span>
+                    </div>
+                    <div class="pill">
+                        <span class="label">Products Listed</span>
+                        <span class="value">{{ profile.products_listed }}</span>
+                    </div>
+                </div>
+
+                <div class="links">
+                    {% if profile.role == 'Seller' %}
+                    <a href="/SellerScreen"><i class="fa-solid fa-gauge-high"></i> Seller Dashboard</a>
+                    <a href="/AddProduct"><i class="fa-solid fa-box-open"></i> Add Product</a>
+                    <a href="/SellerEarnings"><i class="fa-solid fa-sack-dollar"></i> Seller Earnings</a>
+                    <a href="/SellerAnalytics"><i class="fa-solid fa-chart-column"></i> Seller Analytics</a>
+                    {% else %}
+                    <a href="/ViewProduct"><i class="fa-solid fa-box-open"></i> Live Products</a>
+                    <a href="/BidHistory"><i class="fa-solid fa-clock-rotate-left"></i> Bid History</a>
+                    <a href="/ViewWatchlist"><i class="fa-solid fa-bookmark"></i> Watchlist</a>
+                    {% endif %}
+                    <a href="/EditProfile"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</a>
+                    <a href="/Leaderboard"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+                </div>
+
+                <div class="table-wrap" style="margin-top:18px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Username</td>
+                                <td>{{ profile.username }}</td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td>{{ profile.role }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Bids</td>
+                                <td>{{ profile.total_bids }}</td>
+                            </tr>
+                            <tr>
+                                <td>Auctions Won</td>
+                                <td>{{ profile.auctions_won }}</td>
+                            </tr>
+                            <tr>
+                                <td>Products Listed</td>
+                                <td>{{ profile.products_listed }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Payment</title>
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        body { margin:0; font-family: Arial, Helvetica, sans-serif; }
+        .wrap { min-height: 100vh; padding: 28px 16px 84px; background: radial-gradient(circle at top, rgba(99,102,241,.14), transparent 36%), linear-gradient(135deg, #0f172a 0%, #111827 48%, #1e293b 100%); color:#e2e8f0; }
+        html.light .wrap { background: radial-gradient(circle at top, rgba(99,102,241,.12), transparent 38%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%); color:#0f172a; }
+        .shell { width:min(100%, 920px); margin:0 auto; }
+        .cardx { padding: 30px 28px; border-radius:24px; background: rgba(15,23,42,.74); border:1px solid rgba(255,255,255,.12); box-shadow:0 28px 80px rgba(15,23,42,.44); backdrop-filter: blur(18px); }
+        html.light .cardx { background: rgba(255,255,255,.9); color:#0f172a; }
+        h1 { margin:0; font-size: clamp(28px,4vw,40px); }
+        .sub { margin:10px 0 0; opacity:.78; line-height:1.6; }
+        .grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:16px; margin-top:18px; }
+        .panel { padding:18px; border-radius:18px; border:1px solid rgba(148,163,184,.18); background: rgba(99,102,241,.08); }
+        .field { margin-top:14px; }
+        .field label { display:block; font-size:13px; font-weight:700; margin-bottom:8px; }
+        .field input { width:100%; height:48px; border-radius:14px; border:1px solid rgba(100,116,139,.22); background:rgba(255,255,255,.92); padding:0 14px; font-size:14px; }
+        .btn { display:inline-flex; align-items:center; justify-content:center; margin-top:18px; height:48px; padding:0 18px; border-radius:14px; border:0; background:linear-gradient(135deg,#4f46e5,#4338ca); color:#fff; font-weight:800; cursor:pointer; text-decoration:none; }
+        .error { margin-top:14px; padding:12px 14px; border-radius:14px; background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.24); color:#dc2626; font-weight:700; }
+        .ok { margin-top:14px; padding:12px 14px; border-radius:14px; background:rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.24); color:#16a34a; font-weight:700; }
+        @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } .cardx { padding: 22px; } }
+    </style>
+</head>
+<body>
+    {% include 'role_nav.html' %}
+    <div class="wrap">
+        <div class="shell">
+            <div class="cardx">
+                <div class="eyebrow" style="color:#6366f1;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800;">Payment Simulation</div>
+                <h1>Pay for {{ product.pname }}</h1>
+                <p class="sub">This is a dummy payment flow for the winning bid. Enter test card details to generate a transaction ID and invoice.</p>
+
+                <div class="grid">
+                    <div class="panel">
+                        <h3 style="margin:0 0 8px;">Payment Form</h3>
+                        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+                        {% if payment %}<div class="ok">Payment already completed. You can open the invoice directly.</div>{% endif %}
+                        <form method="post" action="/Payment">
+                            <input type="hidden" name="product_id" value="{{ product.pid }}">
+                            <div class="field">
+                                <label>Card Number</label>
+                                <input type="text" name="card_number" placeholder="4111 1111 1111 1111" required>
+                            </div>
+                            <div class="field">
+                                <label>Card Holder</label>
+                                <input type="text" name="card_holder" placeholder="Card holder name" required>
+                            </div>
+                            <div class="field">
+                                <label>Expiry</label>
+                                <input type="text" name="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="field">
+                                <label>CVV</label>
+                                <input type="password" name="cvv" placeholder="123" required>
+                            </div>
+                            <button class="btn" type="submit">Generate Transaction</button>
+                        </form>
+                    </div>
+                    <div class="panel">
+                        <h3 style="margin:0 0 10px;">Auction Summary</h3>
+                        <p><strong>Product:</strong> {{ product.pname }}</p>
+                        <p><strong>Winner:</strong> {{ session.get('bidder') }}</p>
+                        <p><strong>Amount:</strong> ₹{{ winning_amount }}</p>
+                        <p><strong>Seller:</strong> {{ product.seller }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

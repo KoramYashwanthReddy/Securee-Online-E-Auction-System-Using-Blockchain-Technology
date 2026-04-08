@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Bid History</title>
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/swiper.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        .page-section {
+            padding: 28px 16px 84px;
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.14), transparent 36%), linear-gradient(135deg, #0f172a 0%, #111827 48%, #1e293b 100%);
+        }
+
+        html.light .page-section {
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 38%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+        }
+
+        .page-shell {
+            width: min(100%, 1240px);
+            margin: 0 auto;
+        }
+
+        .page-card {
+            padding: 32px 28px 26px;
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 28px 80px rgba(15, 23, 42, 0.44);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            color: #e2e8f0;
+        }
+
+        html.light .page-card {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 23, 42, 0.08);
+            color: #0f172a;
+            box-shadow: 0 28px 80px rgba(148, 163, 184, 0.28);
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .page-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .page-subtitle {
+            margin: 10px 0 0;
+            max-width: 820px;
+            color: inherit;
+            opacity: 0.76;
+            line-height: 1.6;
+        }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.22);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .page-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .page-stat {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        html.light .page-stat {
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .page-stat-label {
+            display: block;
+            color: inherit;
+            opacity: 0.72;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .page-stat-value {
+            display: block;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .page-table-wrap {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .page-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 760px;
+        }
+
+        .page-table th,
+        .page-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            text-align: left;
+        }
+
+        .page-table th {
+            background: rgba(99, 102, 241, 0.08);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .page-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .page-empty {
+            padding: 18px 16px;
+            opacity: 0.75;
+        }
+
+        .page-nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .page-nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            background: rgba(99, 102, 241, 0.1);
+            color: inherit;
+            border: 1px solid rgba(99, 102, 241, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            .page-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'bidder_nav.html' %}
+    <div class="page-section">
+        <div class="page-shell">
+            <div class="page-card">
+                <div class="page-header">
+                    <div>
+                        <div class="page-eyebrow">Bid History</div>
+                        <h1 class="page-title">Blockchain bid ledger</h1>
+                        <p class="page-subtitle">Review every bid you placed, including the product, bid amount, and recorded blockchain timestamp.</p>
+                    </div>
+                    <div class="page-badge"><i class="fa-solid fa-clock-rotate-left"></i> {{ profile.username }}</div>
+                </div>
+
+                <div class="page-stats">
+                    <div class="page-stat">
+                        <span class="page-stat-label">Total Bids</span>
+                        <span class="page-stat-value">{{ history_rows|length }}</span>
+                    </div>
+                    <div class="page-stat">
+                        <span class="page-stat-label">Auction Wins</span>
+                        <span class="page-stat-value">{{ profile.auctions_won }}</span>
+                    </div>
+                    <div class="page-stat">
+                        <span class="page-stat-label">Role</span>
+                        <span class="page-stat-value">{{ profile.role }}</span>
+                    </div>
+                </div>
+
+                <div class="page-nav-links" style="margin-bottom:18px;">
+                    <a href="/ViewProduct"><i class="fa-solid fa-box-open"></i> Live Products</a>
+                    <a href="/Leaderboard"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+                    <a href="/Profile"><i class="fa-solid fa-user"></i> Profile</a>
+                    <a href="/Result"><i class="fa-solid fa-chart-line"></i> Results</a>
+                </div>
+
+                <div class="page-table-wrap">
+                    <table class="page-table">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Bidder Name</th>
+                                <th>Bid Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if history_rows %}
+                                {% for item in history_rows %}
+                                <tr>
+                                    <td>{{ item.pid }}</td>
+                                    <td>{{ item.bidder }}</td>
+                                    <td>₹{{ item.amount }}</td>
+                                    <td>{{ item.time or 'Unavailable' }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr><td colspan="4" class="page-empty">No bid history found for this account.</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

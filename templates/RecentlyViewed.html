@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Recently Viewed Products</title>
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/swiper.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+        }
+        .recent-shell {
+            padding: 36px 16px 80px;
+        }
+        .recent-card {
+            width: min(100%, 1180px);
+            margin: 0 auto;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(15,23,42,0.08);
+            border-radius: 24px;
+            box-shadow: 0 28px 80px rgba(148,163,184,0.24);
+            padding: 28px;
+        }
+        .recent-head {
+            display:flex;
+            justify-content:space-between;
+            gap:16px;
+            flex-wrap:wrap;
+            align-items:flex-start;
+            margin-bottom:20px;
+        }
+        .recent-title {
+            margin:0;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            letter-spacing:-0.03em;
+            color:#0f172a;
+        }
+        .recent-subtitle {
+            margin:10px 0 0;
+            color:#475569;
+            max-width:760px;
+            line-height:1.6;
+        }
+        .recent-grid {
+            display:grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap:16px;
+            margin-top:18px;
+        }
+        .recent-item {
+            padding:16px;
+            border-radius:18px;
+            background: rgba(99,102,241,0.06);
+            border: 1px solid rgba(99,102,241,0.16);
+        }
+        .recent-item img {
+            width:100%;
+            height:180px;
+            object-fit:cover;
+            border-radius:14px;
+            margin-bottom:12px;
+        }
+        .recent-item h3 {
+            margin:0 0 8px;
+            font-size:18px;
+            font-weight:800;
+            color:#0f172a;
+        }
+        .recent-item p {
+            margin:0 0 12px;
+            color:#475569;
+            line-height:1.5;
+        }
+        .recent-meta {
+            display:flex;
+            justify-content:space-between;
+            gap:10px;
+            flex-wrap:wrap;
+            color:#475569;
+            font-size:13px;
+            margin-bottom:12px;
+        }
+        .recent-link {
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            color:#4f46e5;
+            font-weight:700;
+            text-decoration:none;
+        }
+        .recent-empty {
+            color:#475569;
+            padding: 18px 0 6px;
+        }
+        @media (max-width: 992px) {
+            .recent-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 640px) {
+            .recent-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    {% include 'bidder_nav.html' %}
+    <section class="recent-shell">
+        <div class="recent-card">
+            <div class="recent-head">
+                <div>
+                    <div style="text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#4f46e5;font-size:12px;">Bidder Activity</div>
+                    <h1 class="recent-title">Recently Viewed</h1>
+                    <p class="recent-subtitle">Your last five viewed products are tracked in your session so you can return to them quickly.</p>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <a class="btn btn-primary" href="/BidderScreenPage">Back to Dashboard</a>
+                    <a class="btn btn-outline-primary" href="/ViewProduct">Open Live Products</a>
+                </div>
+            </div>
+            {% if recently_viewed_products %}
+            <div class="recent-grid">
+                {% for product in recently_viewed_products %}
+                <article class="recent-item">
+                    <img src="/static/files/{{ product.filename }}" alt="{{ product.pname }}">
+                    <h3>{{ product.pname }}</h3>
+                    <p>{{ product.pinfo }}</p>
+                    <div class="recent-meta">
+                        <span>Base ₹{{ product.base_price }}</span>
+                        <span>Highest ₹{{ product.highest_bid }}</span>
+                    </div>
+                    <div class="recent-meta">
+                        <span>Status: {{ product.status|title }}</span>
+                        <span>{{ product.remaining }}</span>
+                    </div>
+                    <a class="recent-link" href="/ViewProduct">Return to Auction <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="recent-empty">No products have been viewed yet.</div>
+            {% endif %}
+        </div>
+    </section>
+</body>
+</html>

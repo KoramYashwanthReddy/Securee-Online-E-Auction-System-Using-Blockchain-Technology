@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Online auction and bidding HTML template</title>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/swiper.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        .bidder-dashboard-section {
+            position: relative;
+            padding: 28px 16px 84px;
+            --bd-bg: radial-gradient(circle at top, rgba(99, 102, 241, 0.16), transparent 38%), linear-gradient(135deg, #0f172a 0%, #111827 50%, #1e293b 100%);
+            --bd-card-bg: rgba(15, 23, 42, 0.72);
+            --bd-card-border: rgba(255, 255, 255, 0.12);
+            --bd-card-text: #e2e8f0;
+            --bd-heading: #f8fafc;
+            --bd-muted: #cbd5e1;
+            --bd-accent: #6366f1;
+            --bd-surface: rgba(255, 255, 255, 0.04);
+            --bd-border: rgba(148, 163, 184, 0.18);
+            --bd-shadow: 0 28px 80px rgba(15, 23, 42, 0.48);
+            --bd-pill-bg: rgba(99, 102, 241, 0.12);
+            --bd-nav-bg: rgba(15, 23, 42, 0.94);
+            --bd-nav-border: rgba(255, 255, 255, 0.08);
+            --bd-nav-link: #e2e8f0;
+            --bd-nav-link-hover: #ffffff;
+            --bd-nav-active-bg: rgba(99, 102, 241, 0.16);
+            --bd-nav-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
+            background: var(--bd-bg);
+        }
+
+        html.light .bidder-dashboard-section {
+            --bd-bg: radial-gradient(circle at top, rgba(99, 102, 241, 0.14), transparent 40%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+            --bd-card-bg: rgba(255, 255, 255, 0.84);
+            --bd-card-border: rgba(15, 23, 42, 0.08);
+            --bd-card-text: #0f172a;
+            --bd-heading: #0f172a;
+            --bd-muted: #475569;
+            --bd-accent: #4f46e5;
+            --bd-surface: rgba(15, 23, 42, 0.03);
+            --bd-border: rgba(100, 116, 139, 0.18);
+            --bd-shadow: 0 28px 80px rgba(148, 163, 184, 0.28);
+            --bd-pill-bg: rgba(99, 102, 241, 0.1);
+            --bd-nav-bg: rgba(255, 255, 255, 0.9);
+            --bd-nav-border: rgba(15, 23, 42, 0.08);
+            --bd-nav-link: #0f172a;
+            --bd-nav-link-hover: #4f46e5;
+            --bd-nav-active-bg: rgba(99, 102, 241, 0.1);
+            --bd-nav-shadow: 0 18px 40px rgba(148, 163, 184, 0.22);
+        }
+
+        .navbar-top {
+            background: transparent;
+        }
+
+        header.bg-white {
+            background: var(--bd-nav-bg) !important;
+            border-bottom: 1px solid var(--bd-nav-border);
+            box-shadow: var(--bd-nav-shadow);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        header.bg-white .navbar {
+            background: transparent;
+        }
+
+        header.bg-white .navbar-nav {
+            gap: 10px;
+        }
+
+        header.bg-white .nav-link {
+            color: var(--bd-nav-link) !important;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+
+        header.bg-white .nav-link:hover {
+            color: var(--bd-nav-link-hover) !important;
+            background: var(--bd-nav-active-bg);
+            transform: translateY(-1px);
+        }
+
+        header.bg-white .nav-link:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.14);
+        }
+
+        html.dark header.bg-white .nav-link:hover {
+            background: rgba(99, 102, 241, 0.22);
+        }
+
+        html.light header.bg-white .nav-link:hover {
+            background: rgba(99, 102, 241, 0.12);
+        }
+
+        .bidder-dashboard-shell {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bidder-dashboard-card {
+            width: min(100%, 1160px);
+            padding: 34px 32px 30px;
+            border-radius: 16px;
+            background: var(--bd-card-bg);
+            border: 1px solid var(--bd-card-border);
+            box-shadow: var(--bd-shadow);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            color: var(--bd-card-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bidder-dashboard-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(99, 102, 241, 0.08), transparent 32%),
+                linear-gradient(300deg, rgba(59, 130, 246, 0.06), transparent 28%);
+            pointer-events: none;
+        }
+
+        .bidder-dashboard-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bidder-dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .bidder-dashboard-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--bd-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .bidder-dashboard-title {
+            margin: 0;
+            color: var(--bd-heading);
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .bidder-dashboard-subtitle {
+            margin: 10px 0 0;
+            color: var(--bd-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 760px;
+        }
+
+        .bidder-dashboard-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: var(--bd-pill-bg);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--bd-heading);
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .bidder-dashboard-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .bidder-metric {
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: var(--bd-surface);
+            border: 1px solid var(--bd-border);
+        }
+
+        .bidder-metric-label {
+            margin: 0 0 8px;
+            color: var(--bd-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 700;
+        }
+
+        .bidder-metric-value {
+            margin: 0 0 6px;
+            color: var(--bd-heading);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .bidder-metric-note {
+            margin: 0;
+            color: var(--bd-muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bidder-action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .bidder-action-card {
+            display: block;
+            padding: 18px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--bd-border);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bidder-action-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(130deg, transparent 20%, rgba(255, 255, 255, 0.12), transparent 55%);
+            transform: translateX(-120%);
+            transition: transform 0.45s ease;
+            pointer-events: none;
+        }
+
+        .bidder-action-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 44px rgba(79, 70, 229, 0.18);
+            border-color: rgba(99, 102, 241, 0.3);
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.12), rgba(255, 255, 255, 0.04));
+        }
+
+        .bidder-action-card:hover::after {
+            transform: translateX(120%);
+        }
+
+        .bidder-action-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .bidder-action-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.14);
+            color: var(--bd-heading);
+            font-size: 18px;
+        }
+
+        .bidder-action-label {
+            margin: 0;
+            color: var(--bd-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 700;
+        }
+
+        .bidder-action-title {
+            margin: 6px 0 8px;
+            color: var(--bd-heading);
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .bidder-action-text {
+            margin: 0;
+            color: var(--bd-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .bidder-action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            color: var(--bd-accent);
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .bidder-live-section {
+            margin-top: 22px;
+            border-radius: 18px;
+            background: var(--bd-surface);
+            border: 1px solid var(--bd-border);
+            overflow: hidden;
+        }
+
+        .bidder-live-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--bd-border);
+            background: rgba(99, 102, 241, 0.06);
+        }
+
+        .bidder-live-title {
+            margin: 0;
+            color: var(--bd-heading);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .bidder-live-note {
+            color: var(--bd-muted);
+            font-size: 13px;
+        }
+
+        .bidder-live-body {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .bidder-live-item {
+            padding: 18px;
+            border-radius: 16px;
+            border: 1px solid var(--bd-border);
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.08), rgba(255, 255, 255, 0.02));
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        .bidder-live-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+        }
+
+        .bidder-live-item-title {
+            margin: 0 0 8px;
+            color: var(--bd-heading);
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .bidder-live-item-text {
+            margin: 0;
+            color: var(--bd-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .bidder-live-item-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            color: var(--bd-accent);
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .bidder-dashboard-panel {
+            border-radius: 14px;
+            background: var(--bd-surface);
+            border: 1px solid var(--bd-border);
+            overflow: hidden;
+        }
+
+        .bidder-dashboard-panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--bd-border);
+            background: rgba(99, 102, 241, 0.06);
+        }
+
+        .bidder-dashboard-panel-title {
+            margin: 0;
+            color: var(--bd-heading);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .bidder-dashboard-panel-note {
+            color: var(--bd-muted);
+            font-size: 13px;
+        }
+
+        .bidder-dashboard-content {
+            overflow-x: auto;
+        }
+
+        .bidder-analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin: 16px 0 18px;
+        }
+
+        .bidder-analytics-card {
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.18);
+        }
+
+        .bidder-analytics-card span {
+            display: block;
+            color: var(--bd-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .bidder-analytics-card strong {
+            display: block;
+            color: var(--bd-heading);
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .bidder-analytics-bar {
+            margin-top: 10px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.16);
+            overflow: hidden;
+        }
+
+        .bidder-analytics-bar > i {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #22c55e 0%, #4f46e5 100%);
+        }
+
+        .bidder-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .bidder-mini-card {
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--bd-border);
+        }
+
+        .bidder-mini-card img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .bidder-mini-card h4 {
+            margin: 0 0 8px;
+            color: var(--bd-heading);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .bidder-mini-card p {
+            margin: 0 0 10px;
+            color: var(--bd-muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bidder-mini-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            color: var(--bd-muted);
+            font-size: 12px;
+        }
+
+        .bidder-mini-link {
+            display: inline-flex;
+            margin-top: 10px;
+            color: var(--bd-accent);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .bidder-trend-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .bidder-trend-item {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(99, 102, 241, 0.06);
+            border: 1px solid var(--bd-border);
+        }
+
+        .bidder-trend-item strong {
+            display: block;
+            color: var(--bd-heading);
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .bidder-trend-item span {
+            display: block;
+            color: var(--bd-muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bidder-empty-state {
+            padding: 10px 0;
+            color: var(--bd-muted);
+            font-size: 13px;
+        }
+
+        .bidder-dashboard-content table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+        }
+
+        .bidder-dashboard-content th,
+        .bidder-dashboard-content td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--bd-border);
+            color: var(--bd-card-text);
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .bidder-dashboard-content th {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--bd-heading);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.02em;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .bidder-dashboard-content tr:hover td {
+            background: rgba(99, 102, 241, 0.04);
+        }
+
+        .bidder-dashboard-content a {
+            color: var(--bd-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .bidder-dashboard-content a:hover {
+            text-decoration: underline;
+        }
+
+        .bidder-dashboard-content .table {
+            margin-bottom: 0;
+        }
+
+        .bidder-dashboard-content .table-striped > tbody > tr:nth-of-type(odd) > * {
+            background-color: rgba(99, 102, 241, 0.028);
+        }
+
+        .bidder-dashboard-content .alert {
+            margin: 0;
+            border-radius: 12px;
+        }
+
+        .bidder-dashboard-footer {
+            margin-top: 16px;
+            color: var(--bd-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .notification-widget {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .notification-bell {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: rgba(99, 102, 241, 0.1);
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 999px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 54px;
+            width: 320px;
+            max-height: 360px;
+            overflow-y: auto;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+            z-index: 20;
+        }
+
+        .notification-widget.open .notification-dropdown {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            font-size: 13px;
+        }
+
+        .notification-item:last-child {
+            border-bottom: 0;
+        }
+
+        .notification-item.unread {
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        .notification-head {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification-head button {
+            border: 0;
+            background: transparent;
+            color: #4f46e5;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .bidder-dashboard-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .bidder-action-grid,
+            .bidder-live-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .bidder-dashboard-card {
+                padding: 24px 18px 20px;
+            }
+        }
+
+    </style>
+        
+</head>
+
+<body>
+    {% include 'bidder_nav.html' %}
+    <!-- Preloader Start -->
+    <div class="preloader bg-light" id="preloader">
+        <span class="preloader-inner"></span>
+    </div>
+    <!-- Preloader End -->
+    <!-- Back-to-top Start -->
+    <a href="javascript:void(0)" class="back-to-top"><i class="fa-solid fa-up-long"></i></a>
+    <!-- Back-to-top End -->
+    <!-- Header Start !-->
+    <div class="navbar-top border-bottom py-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="d-flex gap-2">
+                        <div class="d-none align-items-center gap-1 nav-top-left">
+                            <i class="fa-solid fa-envelope text-dark"></i>
+                            <p class="fs-14 text-dark text-truncate"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="toggle-theme">
+                        <input type="checkbox" id="changeTheme1" class="changeTheme" value="0">
+                        <label for="changeTheme1" class="m-auto"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="bg-white">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                
+                <div class="nav-right justify-content-center" id="navbar">
+                    <ul class="navbar-nav position-relative d-none d-lg-flex">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="ViewProduct">View Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/BidHistory">Bid History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/ViewWatchlist">Watchlist</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/RecentlyViewed">Recently Viewed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Leaderboard">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/BidderAnalytics">Analytics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Trending">Trending</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Profile?role=Bidder">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="Result">Result</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/BidderLogout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="notification-widget" id="bidderNotificationWidget">
+                                <button class="notification-bell" type="button" id="bidderNotificationBell"><i class="fa-solid fa-bell"></i><span class="notification-count" id="bidderNotificationCount">0</span></button>
+                                <div class="notification-dropdown" id="bidderNotificationDropdown">
+                                    <div class="notification-head">
+                                        <strong>Notifications</strong>
+                                        <button type="button" id="bidderMarkRead">Mark all read</button>
+                                    </div>
+                                    <div id="bidderNotificationList"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-block d-lg-none">
+                       
+                        <li>
+                            <hr>
+                        </li>
+
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                            <div class="d-flex gap-2 nav-btn-group align-items-center justify-content-center">
+                                <button class="bg-transparent text-dark border-0">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                                <a href="login.html" class="bg-transparent text-dark border-0 px-1">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <button class="bg-transparent text-dark border-0"><i
+                                        class="fa-solid fa-heart"></i></button>
+                            </div>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                            <div class="toggle-theme">
+                                <input type="checkbox" class="changeTheme" id="changeTheme" value="0">
+                                <label for="changeTheme" class="me-auto"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex gap-1 nav-btn-group align-items-center">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="nav-right" data-bs-target="#navbar"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggle-menu-icon"><span></span><span></span><span></span><span></span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header End !-->
+    <!-- Main Content Start !-->
+    <main id="main-content" class="position-relative">
+        <section class="banner overflow-hidden" id="current-image" style="background-image: url();">
+            <div class="container position-relative">
+                <div class="row align-items-center justify-content-center gy-4">
+                    <div class="col-xl-7">
+                        <div class="banner-left">
+                            <h1 class="banner-title">Join exclusive auction & Get the
+                                finest.</h1>
+                            
+                        </div>
+                    </div>
+                    <div class="col-11 col-md-8 col-xl-5">
+                        <div class="swiper banner-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-1.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">vintage luxurious house</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-2.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Final match 2022 Shuttlecock and racket</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-3.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">16th-century culverin cannon</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-4.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Vintage Hand Carved Wood Camel Stand </a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-13.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Most famous Skirt piece of celebrities</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bidder-dashboard-section">
+            <div class="bidder-dashboard-shell">
+                <div class="bidder-dashboard-card">
+                    <div class="bidder-dashboard-header">
+                        <div>
+                            <div class="bidder-dashboard-eyebrow">Bidder Workspace</div>
+                            <h2 class="bidder-dashboard-title">Bidder Screen</h2>
+                            <p class="bidder-dashboard-subtitle">Track active products, review your auction position, and move through live bidding in a secure enterprise view.</p>
+                        </div>
+                        <div class="bidder-dashboard-badge">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            Secure Auction Access
+                        </div>
+                    </div>
+                    <div class="bidder-dashboard-metrics">
+                        <div class="bidder-metric">
+                            <p class="bidder-metric-label">Live Products</p>
+                            <p class="bidder-metric-value">Browse inventory</p>
+                            <p class="bidder-metric-note">See available auction items in a focused enterprise layout.</p>
+                        </div>
+                        <div class="bidder-metric">
+                            <p class="bidder-metric-label">Auction Results</p>
+                            <p class="bidder-metric-value">Instant review</p>
+                            <p class="bidder-metric-note">Jump to the result view for completed auctions and outcomes.</p>
+                        </div>
+                        <div class="bidder-metric">
+                            <p class="bidder-metric-label">Session Status</p>
+                            <p class="bidder-metric-value">Authenticated</p>
+                            <p class="bidder-metric-note">Protected bidder access with a clean, modern interface.</p>
+                        </div>
+                    </div>
+                    {% if bidder_analytics %}
+                    <div class="bidder-analytics-grid">
+                        <div class="bidder-analytics-card">
+                            <span>Total Bids</span>
+                            <strong>{{ bidder_analytics.total_bids }}</strong>
+                            <div class="bidder-analytics-bar"><i style="width:{{ bidder_analytics.total_bids * 8 if bidder_analytics.total_bids * 8 < 100 else 100 }}%"></i></div>
+                        </div>
+                        <div class="bidder-analytics-card">
+                            <span>Participated</span>
+                            <strong>{{ bidder_analytics.auctions_participated }}</strong>
+                            <div class="bidder-analytics-bar"><i style="width:{{ bidder_analytics.auctions_participated * 10 if bidder_analytics.auctions_participated * 10 < 100 else 100 }}%"></i></div>
+                        </div>
+                        <div class="bidder-analytics-card">
+                            <span>Auctions Won</span>
+                            <strong>{{ bidder_analytics.auctions_won }}</strong>
+                            <div class="bidder-analytics-bar"><i style="width:{{ bidder_analytics.auctions_won * 18 if bidder_analytics.auctions_won * 18 < 100 else 100 }}%"></i></div>
+                        </div>
+                        <div class="bidder-analytics-card">
+                            <span>Win Rate</span>
+                            <strong>{{ bidder_analytics.win_rate }}%</strong>
+                            <div class="bidder-analytics-bar"><i style="width:{{ bidder_analytics.win_rate if bidder_analytics.win_rate <= 100 else 100 }}%"></i></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="bidder-action-grid">
+                        <a class="bidder-action-card" href="ViewProduct">
+                            <div class="bidder-action-top">
+                                <div class="bidder-action-icon"><i class="fa-solid fa-box-open"></i></div>
+                                <span class="bidder-action-label">Live Products</span>
+                            </div>
+                            <h3 class="bidder-action-title">Open Live Inventory</h3>
+                            <p class="bidder-action-text">Browse products currently added to the auction stream and jump directly to the live products page.</p>
+                            <span class="bidder-action-link">View Products <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a class="bidder-action-card" href="ViewProduct">
+                            <div class="bidder-action-top">
+                                <div class="bidder-action-icon"><i class="fa-solid fa-gavel"></i></div>
+                                <span class="bidder-action-label">Submit Bid</span>
+                            </div>
+                            <h3 class="bidder-action-title">Place a Bid</h3>
+                            <p class="bidder-action-text">Open live products and use the inline quick bid card directly on the product page.</p>
+                            <span class="bidder-action-link">Go to Live Products <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a class="bidder-action-card" href="/BidHistory">
+                            <div class="bidder-action-top">
+                                <div class="bidder-action-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                                <span class="bidder-action-label">Bid History</span>
+                            </div>
+                            <h3 class="bidder-action-title">Review Your Bids</h3>
+                            <p class="bidder-action-text">See every bid placed from your account in a clean blockchain-backed history view.</p>
+                            <span class="bidder-action-link">Open History <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a class="bidder-action-card" href="/ViewWatchlist">
+                            <div class="bidder-action-top">
+                                <div class="bidder-action-icon"><i class="fa-solid fa-bookmark"></i></div>
+                                <span class="bidder-action-label">Watchlist</span>
+                            </div>
+                            <h3 class="bidder-action-title">Open Watchlist</h3>
+                            <p class="bidder-action-text">Track saved products and return to auctions you are following closely.</p>
+                            <span class="bidder-action-link">View Watchlist <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a class="bidder-action-card" href="/Profile?role=Bidder">
+                            <div class="bidder-action-top">
+                                <div class="bidder-action-icon"><i class="fa-solid fa-user-circle"></i></div>
+                                <span class="bidder-action-label">Profile</span>
+                            </div>
+                            <h3 class="bidder-action-title">View Your Profile</h3>
+                            <p class="bidder-action-text">Inspect your role, bidding activity, and auction wins from a single page.</p>
+                            <span class="bidder-action-link">Open Profile <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                        <a class="bidder-action-card" href="Result">
+                            <div class="bidder-action-top">
+                                <div class="bidder-action-icon"><i class="fa-solid fa-chart-line"></i></div>
+                                <span class="bidder-action-label">Results</span>
+                            </div>
+                            <h3 class="bidder-action-title">Track Auction Outcome</h3>
+                            <p class="bidder-action-text">Review the latest completed auction results in a polished enterprise result view.</p>
+                            <span class="bidder-action-link">Open Results <i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                    <div class="bidder-dashboard-panel" style="margin-bottom:18px;">
+                        <div class="bidder-dashboard-panel-head">
+                            <h3 class="bidder-dashboard-panel-title">Recently Viewed</h3>
+                            <div class="bidder-dashboard-panel-note"><a href="/RecentlyViewed">Open full list</a></div>
+                        </div>
+                        <div class="bidder-dashboard-content" style="padding:18px;">
+                            {% if recently_viewed_products %}
+                            <div class="bidder-mini-grid">
+                                {% for product in recently_viewed_products[:3] %}
+                                <div class="bidder-mini-card">
+                                    <img src="/static/files/{{ product.filename }}" alt="{{ product.pname }}">
+                                    <h4>{{ product.pname }}</h4>
+                                    <p>{{ product.pinfo }}</p>
+                                    <div class="bidder-mini-meta">
+                                        <span>Base ₹{{ product.base_price }}</span>
+                                        <span>Highest ₹{{ product.highest_bid }}</span>
+                                    </div>
+                                    <span class="bidder-mini-link">{{ product.remaining }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="bidder-empty-state">No recently viewed products yet. Open a product to start tracking.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="bidder-dashboard-panel" style="margin-bottom:18px;">
+                        <div class="bidder-dashboard-panel-head">
+                            <h3 class="bidder-dashboard-panel-title">Trending Auctions</h3>
+                            <div class="bidder-dashboard-panel-note"><a href="/Trending">Open trending view</a></div>
+                        </div>
+                        <div class="bidder-dashboard-content" style="padding:18px;">
+                            {% if trending_products %}
+                            <div class="bidder-trend-list">
+                                {% for item in trending_products %}
+                                <div class="bidder-trend-item">
+                                    <strong>{{ loop.index }}. {{ item.pname }}</strong>
+                                    <span>Highest bid: ₹{{ item.highest_bid }} | Bids: {{ item.bid_count }} | Time left: {{ item.time_left }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="bidder-empty-state">No trending auctions available yet.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="bidder-live-section">
+                        <div class="bidder-live-head">
+                            <h3 class="bidder-live-title">Live Products Added</h3>
+                            <div class="bidder-live-note">Real-time bidding inventory</div>
+                        </div>
+                        <div class="bidder-live-body">
+                            <div class="bidder-live-item">
+                                <h4 class="bidder-live-item-title">Products are live now</h4>
+                                <p class="bidder-live-item-text">New auction products are added in real time and are immediately available for bidder review.</p>
+                                <a class="bidder-live-item-cta" href="ViewProduct">Go to View Products <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                            <div class="bidder-live-item">
+                                <h4 class="bidder-live-item-title">Submit bids like a card</h4>
+                                <p class="bidder-live-item-text">When you click submit bid, the quick bid card opens on the live products page and stays in the same workspace.</p>
+                                <a class="bidder-live-item-cta" href="ViewProduct">Open Live Products <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bidder-dashboard-panel">
+                        <div class="bidder-dashboard-panel-head">
+                            <h3 class="bidder-dashboard-panel-title">Bidder Overview</h3>
+                            <div class="bidder-dashboard-panel-note">Dynamic dashboard data</div>
+                        </div>
+                        <div class="bidder-dashboard-content">
+                            {{ data|safe }}
+                        </div>
+                    </div>
+                    <div class="bidder-dashboard-footer">Use this workspace to monitor live auction activity and navigate quickly to products or results.</div>
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <!-- Footer End !-->
+
+    <!-- JavaScript Libraries -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/swiper.min.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+    <script>
+        var swiper = new Swiper(".categorySwiper", {
+            spaceBetween: 32,
+            autoplay: {
+                delay: 1000,
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 4,
+                },
+                1400: {
+                    slidesPerView: 6,
+                },
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        const mySwiper = new Swiper('.banner-slider', {
+            effect: "cards",
+            grabCursor: true,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 2000,
+            },
+        });
+
+
+        var x = 0;
+        var y = 1;
+        var currentActiveSlide = $('.swiper-slide-active .banner-card img').attr('src');
+        $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+
+        mySwiper.on('slideChange', function (e) {
+            x = e.activeIndex;
+            if (y <= x) {
+                var currentActiveSlide = $('.swiper-slide-next .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            else {
+                var currentActiveSlide = $('.swiper-slide-prev .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            y = x;
+        });
+
+        (function initNotifications() {
+            const widget = document.getElementById('bidderNotificationWidget');
+            const bell = document.getElementById('bidderNotificationBell');
+            const list = document.getElementById('bidderNotificationList');
+            const count = document.getElementById('bidderNotificationCount');
+            const markRead = document.getElementById('bidderMarkRead');
+            if (!widget || !bell || !list || !count || !markRead) return;
+
+            function renderNotifications(items) {
+                list.innerHTML = '';
+                if (!items || !items.length) {
+                    list.innerHTML = '<div class="notification-item">No notifications</div>';
+                    return;
+                }
+                items.forEach(function (item) {
+                    const row = document.createElement('div');
+                    row.className = 'notification-item' + (item.read ? '' : ' unread');
+                    row.innerHTML = '<div><strong>' + item.message + '</strong></div>' +
+                        '<div style="opacity:.72;margin-top:6px;">' + (item.created_at || '') + '</div>' +
+                        (item.link ? '<div style="margin-top:6px;"><a href="' + item.link + '">Open</a></div>' : '');
+                    list.appendChild(row);
+                });
+            }
+
+            function loadNotifications() {
+                fetch('/Notifications?format=json')
+                    .then(function (response) { return response.json(); })
+                    .then(function (data) {
+                        count.textContent = data.unread_count || 0;
+                        renderNotifications(data.notifications || []);
+                    });
+            }
+
+            bell.addEventListener('click', function () {
+                widget.classList.toggle('open');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!widget.contains(event.target)) {
+                    widget.classList.remove('open');
+                }
+            });
+
+            markRead.addEventListener('click', function () {
+                fetch('/Notifications', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    body: new URLSearchParams({ action: 'read_all' })
+                }).then(loadNotifications);
+            });
+
+            loadNotifications();
+            setInterval(loadNotifications, 15000);
+        })();
+
+
+    </script>
+</body>
+
+</html>

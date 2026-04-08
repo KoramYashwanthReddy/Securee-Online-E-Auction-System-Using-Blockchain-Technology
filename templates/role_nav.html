@@ -1,0 +1,7 @@
+{% if session.get('bidder') %}
+    {% include 'bidder_nav.html' %}
+{% elif session.get('seller') %}
+    {% include 'seller_nav.html' %}
+{% elif session.get('admin') %}
+    {% include 'admin_nav.html' %}
+{% endif %}

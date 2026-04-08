@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Watchlist</title>
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <style>
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
+        .watchlist-wrap {
+            min-height: 100vh;
+            padding: 28px 16px 84px;
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.14), transparent 36%), linear-gradient(135deg, #0f172a 0%, #111827 48%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+        html.light .watchlist-wrap {
+            background: radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 38%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+            color: #0f172a;
+        }
+        .shell { width: min(100%, 1240px); margin: 0 auto; }
+        .cardx {
+            padding: 30px 28px;
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 28px 80px rgba(15, 23, 42, 0.42);
+        }
+        html.light .cardx { background: rgba(255, 255, 255, 0.88); color: #0f172a; }
+        .eyebrow { color: #6366f1; text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 800; margin-bottom: 12px; }
+        h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.1; }
+        .sub { margin: 10px 0 0; max-width: 760px; line-height: 1.6; opacity: .78; }
+        .links { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+        .links a {
+            text-decoration:none; color:inherit; font-weight:700; padding:10px 14px; border-radius:999px;
+            border:1px solid rgba(99,102,241,.18); background: rgba(99,102,241,.1);
+        }
+        .table-wrap { margin-top: 18px; overflow-x: auto; border-radius: 20px; border: 1px solid rgba(148,163,184,.18); }
+        table { width:100%; border-collapse: collapse; min-width: 860px; }
+        th, td { padding: 14px 16px; text-align:left; border-bottom:1px solid rgba(148,163,184,.18); }
+        th { background: rgba(99,102,241,.08); font-size: 14px; font-weight: 800; }
+        tr:last-child td { border-bottom:0; }
+        .status-live { color: #16a34a; font-weight: 800; }
+        .status-ending-soon { color: #d97706; font-weight: 800; }
+        .status-closed { color: #dc2626; font-weight: 800; }
+        .empty {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.16);
+        }
+        @media (max-width: 640px) {
+            .cardx { padding: 22px; border-radius: 20px; }
+        }
+    </style>
+</head>
+<body>
+    {% include 'bidder_nav.html' %}
+    <div class="watchlist-wrap">
+        <div class="shell">
+            <div class="cardx">
+                <div class="eyebrow">Watchlist</div>
+                <h1>{{ bidder_name }}'s Saved Products</h1>
+                <p class="sub">Keep track of auction items you want to revisit. The watchlist uses the current blockchain-backed auction snapshot and respects live end-time updates.</p>
+
+                <div class="links">
+                    <a href="/ViewProduct"><i class="fa-solid fa-box-open"></i> Live Products</a>
+                    <a href="/BidHistory"><i class="fa-solid fa-clock-rotate-left"></i> Bid History</a>
+                    <a href="/Leaderboard"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+                    <a href="/Profile?role=Bidder"><i class="fa-solid fa-user"></i> Profile</a>
+                </div>
+
+                {% if watchlist_rows %}
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>Highest Bid</th>
+                                <th>Leading Bidder</th>
+                                <th>Auction End</th>
+                                <th>Remaining</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in watchlist_rows %}
+                            <tr>
+                                <td>{{ item.pid }}</td>
+                                <td>{{ item.pname }}</td>
+                                <td>â‚¹{{ item.highest_bid }}</td>
+                                <td>{{ item.leader or 'No Bids' }}</td>
+                                <td>{{ item.auction_end }}</td>
+                                <td>{{ item.remaining }}</td>
+                                <td class="status-{{ 'live' if item.status == 'active' else item.status }}">{{ 'Live' if item.status == 'active' else item.status.replace('-', ' ').title() }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="empty">Your watchlist is empty. Add products from the live products page to start tracking them.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

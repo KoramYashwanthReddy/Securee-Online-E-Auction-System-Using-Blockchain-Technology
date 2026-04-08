@@ -1,0 +1,159 @@
+<style>
+    .bidder-nav-shell {
+        position: sticky;
+        top: 0;
+        z-index: 1040;
+        padding: 14px 16px 0;
+    }
+
+    .bidder-nav {
+        width: min(100%, 1320px);
+        margin: 0 auto 18px;
+        padding: 14px 18px;
+        border-radius: 20px;
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.24);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: #e2e8f0;
+    }
+
+    html.light .bidder-nav {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(15, 23, 42, 0.08);
+        color: #0f172a;
+        box-shadow: 0 18px 48px rgba(148, 163, 184, 0.2);
+    }
+
+    .bidder-nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .bidder-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+    }
+
+    .bidder-brand img {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+        flex: 0 0 auto;
+    }
+
+    .bidder-brand span {
+        font-size: 18px;
+    }
+
+    .bidder-nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .bidder-nav-link,
+    .bidder-nav-logout {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .bidder-nav-link {
+        color: inherit;
+        background: transparent;
+    }
+
+    .bidder-nav-link:hover,
+    .bidder-nav-link.active {
+        background: rgba(99, 102, 241, 0.14);
+        color: #4f46e5;
+        transform: translateY(-1px);
+    }
+
+    .bidder-nav-logout {
+        background: linear-gradient(135deg, #4f46e5, #4338ca);
+        color: #fff;
+    }
+
+    .bidder-nav-logout:hover {
+        transform: translateY(-1px);
+        color: #fff;
+    }
+
+    .bidder-nav-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: inherit;
+        opacity: 0.82;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .bidder-nav-meta strong {
+        opacity: 1;
+    }
+
+    body > .navbar-top,
+    body > header.bg-white {
+        display: none !important;
+    }
+
+    @media (max-width: 992px) {
+        .bidder-nav-row {
+            align-items: flex-start;
+        }
+
+        .bidder-nav-links {
+            justify-content: flex-start;
+        }
+    }
+</style>
+<div class="bidder-nav-shell">
+    <div class="bidder-nav">
+        <div class="bidder-nav-row">
+            <a class="bidder-brand" href="{{ url_for('BidderScreenPage') }}">
+                <img src="{{ url_for('static', filename='assets/images/logo.svg') }}" alt="Bidzone">
+                <span>Bidzone Bidding</span>
+            </a>
+            <div class="bidder-nav-links">
+                <a class="bidder-nav-link {% if request.endpoint in ['BidderScreenPage', 'BidderAnalytics'] %}active{% endif %}" href="{{ url_for('BidderScreenPage') }}">Dashboard</a>
+                <a class="bidder-nav-link {% if request.endpoint in ['ViewProduct', 'ViewProductPage'] %}active{% endif %}" href="{{ url_for('ViewProduct') }}">Live Products</a>
+                <a class="bidder-nav-link {% if request.endpoint == 'BidHistory' %}active{% endif %}" href="{{ url_for('BidHistory') }}">Bid History</a>
+                <a class="bidder-nav-link {% if request.endpoint == 'ViewWatchlistRoute' %}active{% endif %}" href="{{ url_for('ViewWatchlistRoute') }}">Watchlist</a>
+                <a class="bidder-nav-link {% if request.endpoint == 'RecentlyViewed' %}active{% endif %}" href="{{ url_for('RecentlyViewed') }}">Recently Viewed</a>
+                <a class="bidder-nav-link {% if request.endpoint == 'Trending' %}active{% endif %}" href="{{ url_for('Trending') }}">Trending</a>
+                <a class="bidder-nav-link {% if request.endpoint == 'Leaderboard' %}active{% endif %}" href="{{ url_for('Leaderboard') }}">Leaderboard</a>
+                <a class="bidder-nav-link {% if request.endpoint in ['Result', 'ResultPage', 'Results'] %}active{% endif %}" href="{{ url_for('Result') }}">Result</a>
+                <a class="bidder-nav-link {% if request.endpoint in ['Notifications'] %}active{% endif %}" href="{{ url_for('Notifications') }}">Notifications</a>
+                <a class="bidder-nav-link {% if request.endpoint in ['Profile'] %}active{% endif %}" href="{{ url_for('Profile') }}">Profile</a>
+                <a class="bidder-nav-link {% if request.endpoint == 'EditProfile' %}active{% endif %}" href="{{ url_for('EditProfile') }}">Edit Profile</a>
+            </div>
+            <div class="bidder-nav-meta">
+                <span><strong>{{ session.get('bidder') or 'Bidder' }}</strong></span>
+                <a class="bidder-nav-logout" href="{{ url_for('BidderLogout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

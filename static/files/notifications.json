@@ -1,0 +1,172 @@
+{
+  "bidder123": [
+    {
+      "id": "TXN20260406010915111BCD",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 01:09:15",
+      "product_id": "10010"
+    },
+    {
+      "id": "TXN2026040609310346F12B",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 09:31:03",
+      "product_id": "11111"
+    },
+    {
+      "id": "TXN202604061032150152EE",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 10:32:15",
+      "product_id": "123123123"
+    },
+    {
+      "id": "TXN202604061207059AE75C",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 12:07:05",
+      "product_id": "1230123"
+    }
+  ],
+  "bidder1": [
+    {
+      "id": "TXN20260406010915111BCD",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 01:09:15",
+      "product_id": "10010"
+    },
+    {
+      "id": "TXN2026040609310346F12B",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 09:31:03",
+      "product_id": "11111"
+    },
+    {
+      "id": "TXN202604061032150152EE",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 10:32:15",
+      "product_id": "123123123"
+    },
+    {
+      "id": "TXN202604061207059AE75C",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 12:07:05",
+      "product_id": "1230123"
+    }
+  ],
+  "Yashwanth": [
+    {
+      "id": "TXN20260406010915111BCD",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 01:09:15",
+      "product_id": "10010"
+    },
+    {
+      "id": "TXN20260406021949C76D5A",
+      "type": "payment",
+      "message": "Payment successful for Mango.",
+      "link": "/Invoice/TXN20260406021949C76D5A",
+      "read": false,
+      "created_at": "2026-04-06 02:19:49",
+      "product_id": "012"
+    },
+    {
+      "id": "TXN2026040609310346F12B",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 09:31:03",
+      "product_id": "11111"
+    },
+    {
+      "id": "TXN20260406093632AFE539",
+      "type": "payment",
+      "message": "Payment successful for glass.",
+      "link": "/Invoice/TXN20260406093632AFE539",
+      "read": false,
+      "created_at": "2026-04-06 09:36:32",
+      "product_id": "3245"
+    },
+    {
+      "id": "TXN202604061032150152EE",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 10:32:15",
+      "product_id": "123123123"
+    },
+    {
+      "id": "TXN202604061207059AE75C",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 12:07:05",
+      "product_id": "1230123"
+    }
+  ],
+  "Yashwanth123": [
+    {
+      "id": "TXN20260406010915111BCD",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 01:09:15",
+      "product_id": "10010"
+    },
+    {
+      "id": "TXN2026040609310346F12B",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 09:31:03",
+      "product_id": "11111"
+    },
+    {
+      "id": "TXN202604061032150152EE",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 10:32:15",
+      "product_id": "123123123"
+    },
+    {
+      "id": "TXN202604061207059AE75C",
+      "type": "new_product",
+      "message": "New product added: Mango.",
+      "link": "/ViewProduct",
+      "read": false,
+      "created_at": "2026-04-06 12:07:05",
+      "product_id": "1230123"
+    }
+  ]
+}

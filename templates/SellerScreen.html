@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Online auction and bidding HTML template</title>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/swiper.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        .seller-dashboard-section {
+            position: relative;
+            padding: 34px 16px 84px;
+            background:
+                radial-gradient(circle at top, rgba(99, 102, 241, 0.15), transparent 36%),
+                linear-gradient(135deg, #0f172a 0%, #111827 48%, #1e293b 100%);
+        }
+
+        html.light .seller-dashboard-section {
+            background:
+                radial-gradient(circle at top, rgba(99, 102, 241, 0.13), transparent 38%),
+                linear-gradient(135deg, #eef2ff 0%, #e2e8f0 44%, #f8fafc 100%);
+        }
+
+        .seller-dashboard-shell {
+            width: min(100%, 1240px);
+            margin: 0 auto;
+        }
+
+        .seller-dashboard-card {
+            padding: 30px 28px 26px;
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 28px 80px rgba(15, 23, 42, 0.42);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            color: #e2e8f0;
+        }
+
+        html.light .seller-dashboard-card {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 23, 42, 0.08);
+            color: #0f172a;
+            box-shadow: 0 28px 80px rgba(148, 163, 184, 0.28);
+        }
+
+        .seller-dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .seller-dashboard-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .seller-dashboard-title {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: inherit;
+        }
+
+        .seller-dashboard-subtitle {
+            margin: 10px 0 0;
+            max-width: 780px;
+            color: inherit;
+            opacity: 0.78;
+            line-height: 1.6;
+        }
+
+        .seller-dashboard-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.22);
+            color: inherit;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .seller-message {
+            margin: 0 0 18px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.24);
+            color: inherit;
+            font-weight: 600;
+        }
+
+        .seller-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .seller-analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        .seller-stat {
+            padding: 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        html.light .seller-stat {
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .seller-stat-label {
+            display: block;
+            color: inherit;
+            opacity: 0.7;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .seller-stat-value {
+            display: block;
+            font-size: clamp(24px, 4vw, 34px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: inherit;
+        }
+
+        .seller-analytics-card {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.16);
+        }
+
+        .seller-analytics-card h4 {
+            margin: 0 0 10px;
+            color: inherit;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .seller-analytics-card p {
+            margin: 0;
+            color: inherit;
+            opacity: 0.78;
+            line-height: 1.55;
+            font-size: 13px;
+        }
+
+        .seller-section-panel {
+            margin-top: 22px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        html.light .seller-section-panel {
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .seller-section-head {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .seller-section-title {
+            margin: 0;
+            color: inherit;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .seller-table-wrap {
+            overflow-x: auto;
+        }
+
+        .seller-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+        }
+
+        .seller-table th,
+        .seller-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            text-align: left;
+            color: inherit;
+        }
+
+        .seller-table th {
+            font-size: 14px;
+            font-weight: 700;
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .seller-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .seller-empty {
+            padding: 18px;
+            color: inherit;
+            opacity: 0.75;
+        }
+
+        .notification-widget {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .notification-bell {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: rgba(99, 102, 241, 0.1);
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 999px;
+            background: #ef4444;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 54px;
+            width: 320px;
+            max-height: 360px;
+            overflow-y: auto;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+            z-index: 20;
+        }
+
+        .notification-widget.open .notification-dropdown {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            font-size: 13px;
+        }
+
+        .notification-item:last-child {
+            border-bottom: 0;
+        }
+
+        .notification-item.unread {
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        .notification-item a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .notification-head {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification-head button {
+            border: 0;
+            background: transparent;
+            color: #4f46e5;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .seller-stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+        
+</head>
+
+<body>
+    {% include 'seller_nav.html' %}
+    <!-- Preloader Start -->
+    <div class="preloader bg-light" id="preloader">
+        <span class="preloader-inner"></span>
+    </div>
+    <!-- Preloader End -->
+    <!-- Back-to-top Start -->
+    <a href="javascript:void(0)" class="back-to-top"><i class="fa-solid fa-up-long"></i></a>
+    <!-- Back-to-top End -->
+    <!-- Header Start !-->
+    <div class="navbar-top border-bottom py-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="d-flex gap-2">
+                        <div class="d-none align-items-center gap-1 nav-top-left">
+                            <i class="fa-solid fa-envelope text-dark"></i>
+                            <p class="fs-14 text-dark text-truncate"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="toggle-theme">
+                        <input type="checkbox" id="changeTheme1" class="changeTheme" value="0">
+                        <label for="changeTheme1" class="m-auto"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="bg-white">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                
+                <div class="nav-right justify-content-center" id="navbar">
+                    <ul class="navbar-nav position-relative d-none d-lg-flex">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="AddProduct">Add Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="ViewBid">Check Status</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/SellerEarnings">Seller Earnings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/SellerAnalytics">Seller Analytics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Profile?role=Seller">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Leaderboard">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/SellerLogout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="notification-widget" id="sellerNotificationWidget">
+                                <button class="notification-bell" type="button" id="sellerNotificationBell"><i class="fa-solid fa-bell"></i><span class="notification-count" id="sellerNotificationCount">0</span></button>
+                                <div class="notification-dropdown" id="sellerNotificationDropdown">
+                                    <div class="notification-head">
+                                        <strong>Notifications</strong>
+                                        <button type="button" id="sellerMarkRead">Mark all read</button>
+                                    </div>
+                                    <div id="sellerNotificationList"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-block d-lg-none">
+                       
+                        <li>
+                            <hr>
+                        </li>
+
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                            <div class="d-flex gap-2 nav-btn-group align-items-center justify-content-center">
+                                <button class="bg-transparent text-dark border-0">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                                <a href="login.html" class="bg-transparent text-dark border-0 px-1">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <button class="bg-transparent text-dark border-0"><i
+                                        class="fa-solid fa-heart"></i></button>
+                            </div>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                            <div class="toggle-theme">
+                                <input type="checkbox" class="changeTheme" id="changeTheme" value="0">
+                                <label for="changeTheme" class="me-auto"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex gap-1 nav-btn-group align-items-center">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="nav-right" data-bs-target="#navbar"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggle-menu-icon"><span></span><span></span><span></span><span></span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header End !-->
+    <!-- Main Content Start !-->
+    <main id="main-content" class="position-relative">
+        <section class="banner overflow-hidden" id="current-image" style="background-image: url();">
+            <div class="container position-relative">
+                <div class="row align-items-center justify-content-center gy-4">
+                    <div class="col-xl-7">
+                        <div class="banner-left">
+                            <h1 class="banner-title">Join exclusive auction & Get the
+                                finest.</h1>
+                            
+                        </div>
+                    </div>
+                    <div class="col-11 col-md-8 col-xl-5">
+                        <div class="swiper banner-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-1.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">vintage luxurious house</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-2.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Final match 2022 Shuttlecock and racket</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-3.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">16th-century culverin cannon</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-4.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Vintage Hand Carved Wood Camel Stand </a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-13.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Most famous Skirt piece of celebrities</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="seller-dashboard-section">
+            <div class="seller-dashboard-shell">
+                <div class="seller-dashboard-card">
+                    <div class="seller-dashboard-header">
+                        <div>
+                            <div class="seller-dashboard-eyebrow">Seller Dashboard</div>
+                            <h2 class="seller-dashboard-title">Earnings overview</h2>
+                            <p class="seller-dashboard-subtitle">Track how many products have been sold and the total earnings generated from completed auctions on the blockchain.</p>
+                        </div>
+                        <div class="seller-dashboard-badge">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                            Live Seller Metrics
+                        </div>
+                    </div>
+
+                    {% if data %}
+                    <div class="seller-message">{{ data|safe }}</div>
+                    {% endif %}
+
+                    {% if seller_dashboard %}
+                    <div class="seller-stats-grid">
+                        <div class="seller-stat">
+                            <span class="seller-stat-label">Total Products Sold</span>
+                            <span class="seller-stat-value">{{ seller_dashboard.total_products_sold }}</span>
+                        </div>
+                        <div class="seller-stat">
+                            <span class="seller-stat-label">Total Earnings</span>
+                            <span class="seller-stat-value">₹{{ seller_dashboard.total_earnings }}</span>
+                        </div>
+                        <div class="seller-stat">
+                            <span class="seller-stat-label">Seller</span>
+                            <span class="seller-stat-value">{{ seller_dashboard.seller_name }}</span>
+                        </div>
+                    </div>
+
+                    {% if seller_analytics %}
+                    <div class="seller-section-panel">
+                        <div class="seller-section-head">
+                            <h3 class="seller-section-title">Seller Performance Analytics</h3>
+                        </div>
+                        <div class="seller-table-wrap" style="padding:18px;">
+                            <div class="seller-analytics-grid">
+                                <div class="seller-analytics-card">
+                                    <h4>Total Products Listed</h4>
+                                    <p>{{ seller_analytics.total_products_listed }}</p>
+                                </div>
+                                <div class="seller-analytics-card">
+                                    <h4>Total Products Sold</h4>
+                                    <p>{{ seller_analytics.total_products_sold }}</p>
+                                </div>
+                                <div class="seller-analytics-card">
+                                    <h4>Total Earnings</h4>
+                                    <p>â‚¹{{ seller_analytics.total_earnings }}</p>
+                                </div>
+                                <div class="seller-analytics-card">
+                                    <h4>Average Bid Per Product</h4>
+                                    <p>â‚¹{{ seller_analytics.average_bid_per_product }}</p>
+                                </div>
+                            </div>
+                            <div class="seller-analytics-card" style="margin-top:16px;">
+                                <h4>Highest Selling Product</h4>
+                                <p>{{ seller_analytics.highest_selling_product }} - â‚¹{{ seller_analytics.highest_selling_amount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="seller-section-panel">
+                        <div class="seller-section-head">
+                            <h3 class="seller-section-title">Sold Products</h3>
+                        </div>
+                        <div class="seller-table-wrap">
+                            <table class="seller-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Product Name</th>
+                                        <th>Winning Bidder</th>
+                                        <th>Winning Bid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if seller_dashboard.sold_products %}
+                                        {% for item in seller_dashboard.sold_products %}
+                                        <tr>
+                                            <td>{{ item.pid }}</td>
+                                            <td>{{ item.product_name }}</td>
+                                            <td>{{ item.winner }}</td>
+                                            <td>₹{{ item.winning_bid }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="4" class="seller-empty">No sold products recorded yet.</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <!-- Footer End !-->
+
+    <!-- JavaScript Libraries -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/swiper.min.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+    <script>
+        var swiper = new Swiper(".categorySwiper", {
+            spaceBetween: 32,
+            autoplay: {
+                delay: 1000,
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 4,
+                },
+                1400: {
+                    slidesPerView: 6,
+                },
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        const mySwiper = new Swiper('.banner-slider', {
+            effect: "cards",
+            grabCursor: true,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 2000,
+            },
+        });
+
+
+        var x = 0;
+        var y = 1;
+        var currentActiveSlide = $('.swiper-slide-active .banner-card img').attr('src');
+        $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+
+        mySwiper.on('slideChange', function (e) {
+            x = e.activeIndex;
+            if (y <= x) {
+                var currentActiveSlide = $('.swiper-slide-next .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            else {
+                var currentActiveSlide = $('.swiper-slide-prev .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            y = x;
+        });
+
+        (function initNotifications() {
+            const widget = document.getElementById('sellerNotificationWidget');
+            const bell = document.getElementById('sellerNotificationBell');
+            const list = document.getElementById('sellerNotificationList');
+            const count = document.getElementById('sellerNotificationCount');
+            const markRead = document.getElementById('sellerMarkRead');
+
+            if (!widget || !bell || !list || !count || !markRead) return;
+
+            function renderNotifications(items) {
+                list.innerHTML = '';
+                if (!items || !items.length) {
+                    list.innerHTML = '<div class="notification-item">No notifications</div>';
+                    return;
+                }
+                items.forEach(function (item) {
+                    const row = document.createElement('div');
+                    row.className = 'notification-item' + (item.read ? '' : ' unread');
+                    row.innerHTML = '<div><strong>' + item.message + '</strong></div>' +
+                        '<div style="opacity:.72;margin-top:6px;">' + (item.created_at || '') + '</div>' +
+                        (item.link ? '<div style="margin-top:6px;"><a href="' + item.link + '">Open</a></div>' : '');
+                    list.appendChild(row);
+                });
+            }
+
+            function loadNotifications() {
+                fetch('/Notifications?format=json')
+                    .then(function (response) { return response.json(); })
+                    .then(function (data) {
+                        count.textContent = data.unread_count || 0;
+                        renderNotifications(data.notifications || []);
+                    });
+            }
+
+            bell.addEventListener('click', function () {
+                widget.classList.toggle('open');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!widget.contains(event.target)) {
+                    widget.classList.remove('open');
+                }
+            });
+
+            markRead.addEventListener('click', function () {
+                fetch('/Notifications', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    body: new URLSearchParams({ action: 'read_all' })
+                }).then(loadNotifications);
+            });
+
+            loadNotifications();
+            setInterval(loadNotifications, 15000);
+        })();
+
+
+    </script>
+</body>
+
+</html>

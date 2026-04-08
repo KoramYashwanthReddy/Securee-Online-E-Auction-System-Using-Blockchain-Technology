@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bidzone - Bid Chart</title>
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        body { margin:0; font-family: Arial, Helvetica, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #111827 48%, #1e293b 100%); color:#e2e8f0; }
+        .wrap { min-height:100vh; padding:30px 16px 84px; }
+        .shell { width:min(100%, 1180px); margin:0 auto; }
+        .cardx { padding:30px; border-radius:24px; background: rgba(15,23,42,.74); border:1px solid rgba(255,255,255,.12); box-shadow:0 28px 80px rgba(15,23,42,.44); backdrop-filter: blur(18px); }
+        h1 { margin:0; font-size: clamp(28px,4vw,40px); }
+        .sub { margin:10px 0 0; opacity:.78; line-height:1.6; }
+        .grid { display:grid; grid-template-columns: 1fr 320px; gap:18px; margin-top:18px; }
+        .panel { padding:18px; border-radius:18px; border:1px solid rgba(148,163,184,.18); background:rgba(99,102,241,.08); }
+        canvas { width:100%; height:420px; background:#fff; border-radius:18px; border:1px solid rgba(148,163,184,.18); }
+        table { width:100%; border-collapse:collapse; margin-top:14px; }
+        th, td { padding:10px 12px; text-align:left; border-bottom:1px solid rgba(148,163,184,.18); }
+        th { background: rgba(99,102,241,.08); }
+        .links a { display:inline-flex; margin-right:10px; margin-top:12px; color:#93c5fd; text-decoration:none; font-weight:700; }
+        @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } .cardx { padding:22px; } }
+    </style>
+</head>
+<body>
+    {% include 'role_nav.html' %}
+    <div class="wrap">
+        <div class="shell">
+            <div class="cardx">
+                <div style="color:#6366f1;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800;">Bid Growth Chart</div>
+                <h1>{{ product.pname }}</h1>
+                <p class="sub">Time on the X axis and bid amount on the Y axis, plotted from blockchain history.</p>
+                <div class="links">
+                    <a href="/ViewProduct">Live Products</a>
+                    <a href="/BidHistory">Bid History</a>
+                    <a href="/Notifications">Notifications</a>
+                </div>
+                <div class="grid">
+                    <div>
+                        <canvas id="bidChart" width="900" height="420"></canvas>
+                    </div>
+                    <div class="panel">
+                        <h3 style="margin-top:0;">Bid Points</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Time</th><th>Amount</th></tr>
+                            </thead>
+                            <tbody>
+                                {% for row in chart_rows %}
+                                <tr>
+                                    <td>{{ row.time or 'Unknown' }}</td>
+                                    <td>₹{{ row.amount }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const chartRows = {{ chart_rows|tojson }};
+        const canvas = document.getElementById('bidChart');
+        const ctx = canvas.getContext('2d');
+
+        function drawChart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const padding = 56;
+            const w = canvas.width - padding * 2;
+            const h = canvas.height - padding * 2;
+            const data = chartRows.map(item => ({
+                t: item.time || '',
+                a: Number(item.amount || 0)
+            }));
+
+            if (!data.length) {
+                ctx.fillStyle = '#0f172a';
+                ctx.font = 'bold 20px Arial';
+                ctx.fillText('No bid data available', padding, canvas.height / 2);
+                return;
+            }
+
+            const maxAmount = Math.max(...data.map(d => d.a));
+            const minAmount = Math.min(...data.map(d => d.a));
+            const spread = Math.max(1, maxAmount - minAmount);
+
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, padding + h);
+            ctx.lineTo(padding + w, padding + h);
+            ctx.stroke();
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = '12px Arial';
+            ctx.fillText('Amount', 10, 20);
+            ctx.fillText('Time', canvas.width - 50, canvas.height - 12);
+
+            ctx.strokeStyle = '#4f46e5';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+
+            data.forEach((point, index) => {
+                const x = padding + (data.length === 1 ? w / 2 : (w * index) / (data.length - 1));
+                const y = padding + h - ((point.a - minAmount) / spread) * h;
+                if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            data.forEach((point, index) => {
+                const x = padding + (data.length === 1 ? w / 2 : (w * index) / (data.length - 1));
+                const y = padding + h - ((point.a - minAmount) / spread) * h;
+                ctx.fillStyle = '#16a34a';
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#0f172a';
+                ctx.font = '11px Arial';
+                ctx.fillText(point.t.slice(11, 16) || point.t.slice(0, 16), x - 30, canvas.height - 28);
+                ctx.fillText('₹' + point.a, x - 16, y - 10);
+            });
+        }
+
+        drawChart();
+    </script>
+</body>
+</html>

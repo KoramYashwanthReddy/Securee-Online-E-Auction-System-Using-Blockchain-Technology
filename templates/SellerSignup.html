@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" id="theme" class="light">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static/assets/images/auction-fevicon.png">
+    <title>Bidzone - Online auction and bidding HTML template</title>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="static/assets/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/swiper.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="static/assets/css/responsive.css" type="text/css">
+    <style>
+        .signup-section {
+            padding: 18px 16px 84px;
+            --su-bg: radial-gradient(circle at top, rgba(99, 102, 241, 0.16), transparent 34%), linear-gradient(135deg, #eef2ff 0%, #e2e8f0 46%, #f8fafc 100%);
+            --su-card-bg: rgba(255, 255, 255, 0.92);
+            --su-card-border: rgba(15, 23, 42, 0.08);
+            --su-card-shadow: 0 28px 80px rgba(148, 163, 184, 0.28);
+            --su-text: #0f172a;
+            --su-muted: #475569;
+            --su-accent: #4f46e5;
+            --su-field-bg: #ffffff;
+            --su-field-border: rgba(100, 116, 139, 0.2);
+            --su-field-focus: rgba(99, 102, 241, 0.24);
+            --su-button-bg: linear-gradient(135deg, #4f46e5 0%, #4338ca 60%, #3730a3 100%);
+            --su-button-hover: linear-gradient(135deg, #6366f1 0%, #4f46e5 60%, #4338ca 100%);
+            background: var(--su-bg);
+        }
+
+        html.dark .signup-section {
+            --su-bg: radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 34%), linear-gradient(135deg, #0f172a 0%, #111827 50%, #1e293b 100%);
+            --su-card-bg: rgba(15, 23, 42, 0.9);
+            --su-card-border: rgba(255, 255, 255, 0.1);
+            --su-card-shadow: 0 32px 90px rgba(2, 6, 23, 0.34);
+            --su-text: #e2e8f0;
+            --su-muted: #cbd5e1;
+            --su-accent: #818cf8;
+            --su-field-bg: rgba(255, 255, 255, 0.04);
+            --su-field-border: rgba(148, 163, 184, 0.2);
+            --su-field-focus: rgba(99, 102, 241, 0.28);
+            --su-button-bg: linear-gradient(135deg, #6366f1 0%, #4f46e5 60%, #4338ca 100%);
+            --su-button-hover: linear-gradient(135deg, #818cf8 0%, #6366f1 60%, #4f46e5 100%);
+        }
+
+        .signup-shell {
+            display: flex;
+            justify-content: center;
+        }
+
+        .signup-card {
+            width: min(100%, 900px);
+            margin-top: 10px;
+            padding: 34px;
+            border-radius: 24px;
+            background: var(--su-card-bg);
+            border: 1px solid var(--su-card-border);
+            box-shadow: var(--su-card-shadow);
+            color: var(--su-text);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .signup-eyebrow {
+            margin: 0 0 10px;
+            color: var(--su-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .signup-title {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 42px);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .signup-subtitle {
+            margin: 12px 0 0;
+            color: var(--su-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 720px;
+        }
+
+        .signup-form-card {
+            margin-top: 24px;
+            padding: 24px;
+            border-radius: 20px;
+            background: var(--su-card-bg);
+            border: 1px solid var(--su-card-border);
+        }
+
+        .signup-content-grid {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .signup-panel {
+            padding: 24px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.06), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(99, 102, 241, 0.16);
+        }
+
+        .signup-panel h3 {
+            margin: 0 0 10px;
+            color: var(--su-text);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .signup-panel p {
+            margin: 0;
+            color: var(--su-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .signup-message {
+            margin-bottom: 18px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.18);
+            color: var(--su-text);
+            font-weight: 600;
+        }
+
+        .signup-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .signup-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .signup-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .signup-field label {
+            color: var(--su-muted);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .signup-field input {
+            width: 100%;
+            height: 54px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid var(--su-field-border);
+            background: var(--su-field-bg);
+            color: var(--su-text);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .signup-field input:focus {
+            border-color: rgba(99, 102, 241, 0.9);
+            box-shadow: 0 0 0 4px var(--su-field-focus);
+            transform: translateY(-1px);
+        }
+
+        .signup-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .signup-actions input[type="submit"] {
+            min-width: 190px;
+            height: 54px;
+            border: 0;
+            border-radius: 16px;
+            background: var(--su-button-bg);
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            box-shadow: 0 16px 34px rgba(79, 70, 229, 0.22);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .signup-actions input[type="submit"]:hover {
+            transform: translateY(-1px);
+            background: var(--su-button-hover);
+            box-shadow: 0 20px 38px rgba(79, 70, 229, 0.28);
+        }
+
+        .signup-note {
+            margin-top: 16px;
+            color: var(--su-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 992px) {
+            .signup-content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .signup-card {
+                padding: 22px;
+                border-radius: 20px;
+            }
+
+            .signup-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .signup-form-card {
+                padding: 18px;
+            }
+
+            .signup-panel {
+                padding: 18px;
+            }
+        }
+    </style>
+        <script LANGUAGE="Javascript" >
+            function validate(){
+                var x=document.forms["f1"]["t1"].value;
+                var y=document.forms["f1"]["t2"].value;
+                var b=document.forms["f1"]["t3"].value;
+                var c=document.forms["f1"]["t4"].value;
+                var a=document.forms["f1"]["t5"].value;
+                var d=document.forms["f1"]["t6"].value;
+                if(x == null || x==""){
+                    window.alert("Name must be enter");
+                    document.f1.t1.focus();
+                    return false;
+                }
+                if(y == null || y==""){
+                    window.alert("Username must be entered");
+                    document.f1.t2.focus();
+                    return false;
+                }
+                if(b == null || b==""){
+                    window.alert("Password must be entered");
+                    document.f1.t3.focus();
+                    return false;
+                }
+                if(c == null || c==""){
+                    window.alert("Address must be entered");
+                    document.f1.t4.focus();
+                    return false;
+                }
+                if(a == null || a==""){
+                    window.alert("Number contact no must be entered");
+                    document.f1.t5.focus();
+                    return false;
+                }
+                if(isNaN(a)){
+                    alert("Contact no must be numeric");
+                    document.f1.t5.focus();
+                    return false;
+                }
+                if(a.length != 10){
+                    alert("Contact number must be 10 digits long");
+                    document.f1.t5.focus();
+                    return false;
+                }
+                if(d == null || d==""){
+                    window.alert("Email must be entered");
+                    document.f1.t6.focus();
+                    return false;
+                }
+                return true;
+            }
+                    
+                
+                </script>
+</head>
+
+<body>
+    {% include 'seller_nav.html' %}
+    <!-- Preloader Start -->
+    <div class="preloader bg-light" id="preloader">
+        <span class="preloader-inner"></span>
+    </div>
+    <!-- Preloader End -->
+    <!-- Back-to-top Start -->
+    <a href="javascript:void(0)" class="back-to-top"><i class="fa-solid fa-up-long"></i></a>
+    <!-- Back-to-top End -->
+    <!-- Header Start !-->
+    <div class="navbar-top border-bottom py-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="d-flex gap-2">
+                        <div class="d-none align-items-center gap-1 nav-top-left">
+                            <i class="fa-solid fa-envelope text-dark"></i>
+                            <p class="fs-14 text-dark text-truncate"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="toggle-theme">
+                        <input type="checkbox" id="changeTheme1" class="changeTheme" value="0">
+                        <label for="changeTheme1" class="m-auto"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="bg-white">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                
+                <div class="nav-right justify-content-center" id="navbar">
+                    <ul class="navbar-nav position-relative d-none d-lg-flex">
+                        <li class="nav-item dropdown-tgl">
+                            <a class="nav-link text-dark" href="javascript:void(0)">Bidder Login</a>
+                            <ul class="sub-menu">
+                                <li><a href="BidderSignup">SignUp</a></li>
+                                <li><a href="BidderLogin">SignIn</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown-tgl">
+                            <a class="promotion-link nav-link text-dark new-toggle" href="javascript:void(0)">Seller Login</a>
+                            <ul class="sub-menu">
+                                <li><a href="SellerSignup">SignUp</a></li>
+                                <li><a href="SellerLogin">SignIn</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="AdminLogin">Admin Login</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-block d-lg-none">
+                       
+                        <li>
+                            <hr>
+                        </li>
+
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                            <div class="d-flex gap-2 nav-btn-group align-items-center justify-content-center">
+                                <button class="bg-transparent text-dark border-0">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                                <a href="login.html" class="bg-transparent text-dark border-0 px-1">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <button class="bg-transparent text-dark border-0"><i
+                                        class="fa-solid fa-heart"></i></button>
+                            </div>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                            <div class="toggle-theme">
+                                <input type="checkbox" class="changeTheme" id="changeTheme" value="0">
+                                <label for="changeTheme" class="me-auto"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex gap-1 nav-btn-group align-items-center">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="nav-right" data-bs-target="#navbar"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggle-menu-icon"><span></span><span></span><span></span><span></span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header End !-->
+    <!-- Main Content Start !-->
+    <main id="main-content" class="position-relative">
+        <section class="banner overflow-hidden" id="current-image" style="background-image: url();">
+            <div class="container position-relative">
+                <div class="row align-items-center justify-content-center gy-4">
+                    <div class="col-xl-7">
+                        <div class="banner-left">
+                            <h1 class="banner-title">Join exclusive auction & Get the
+                                finest.</h1>
+                            
+                        </div>
+                    </div>
+                    <div class="col-11 col-md-8 col-xl-5">
+                        <div class="swiper banner-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-1.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">vintage luxurious house</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-2.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Final match 2022 Shuttlecock and racket</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-3.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">16th-century culverin cannon</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-4.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Vintage Hand Carved Wood Camel Stand </a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="banner-card position-relative">
+                                        <img src="static/assets/images/auction-product-13.png" alt="banner-bid">
+                                        <div class="banner-card-disc">
+                                            <a href="">Most famous Skirt piece of celebrities</a>
+                                            <p>$350.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="signup-section">
+            <div class="container">
+                <div class="signup-shell">
+                    <div class="signup-card">
+                        <p class="signup-eyebrow">Seller Enrollment</p>
+                        <h1 class="signup-title">Create Seller Account</h1>
+                        <p class="signup-subtitle">Register a secure seller profile to publish products, manage auction listings, and monitor activity in a professional dashboard.</p>
+                        <div class="signup-form-card">
+                            {% if data %}
+                            <div class="signup-message">{{ data|safe }}</div>
+                            {% endif %}
+                            <form name="f1" method="post" action="/AddSellerAction" enctype="multipart/form-data" onsubmit="return validate()">
+                                <div class="signup-grid">
+                                    <div class="signup-field">
+                                        <label for="t1">Name</label>
+                                        <input type="text" name="t1" id="t1" autocomplete="name">
+                                    </div>
+                                    <div class="signup-field">
+                                        <label for="t2">Username</label>
+                                        <input type="text" name="t2" id="t2" autocomplete="username">
+                                    </div>
+                                    <div class="signup-field">
+                                        <label for="t3">Password</label>
+                                        <input type="password" name="t3" id="t3" autocomplete="new-password">
+                                    </div>
+                                    <div class="signup-field">
+                                        <label for="t5">Contact Number</label>
+                                        <input type="number" name="t5" id="t5" inputmode="numeric">
+                                    </div>
+                                    <div class="signup-field full">
+                                        <label for="t4">Address</label>
+                                        <input type="text" name="t4" id="t4" autocomplete="street-address">
+                                    </div>
+                                    <div class="signup-field full">
+                                        <label for="t6">Email</label>
+                                        <input type="email" name="t6" id="t6" autocomplete="email">
+                                    </div>
+                                </div>
+                                <div class="signup-actions">
+                                    <input type="submit" value="Add Seller">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="signup-content-grid">
+                            <div class="signup-panel">
+                                <h3>Trusted Seller Access</h3>
+                                <p>Your details are validated before activation. The account gives access to product management, auction insights, and seller status tracking.</p>
+                            </div>
+                            <div class="signup-panel">
+                                <h3>Seller Workflow</h3>
+                                <p>Publish products, monitor bids, and review seller status through a unified enterprise-grade dashboard after registration.</p>
+                            </div>
+                        </div>
+                        <div class="signup-note">Enterprise-grade registration with secure seller onboarding and clear validation.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <!-- Footer End !-->
+
+    <!-- JavaScript Libraries -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/swiper.min.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+    <script>
+        var swiper = new Swiper(".categorySwiper", {
+            spaceBetween: 32,
+            autoplay: {
+                delay: 1000,
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                992: {
+                    slidesPerView: 4,
+                },
+                1400: {
+                    slidesPerView: 6,
+                },
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        const mySwiper = new Swiper('.banner-slider', {
+            effect: "cards",
+            grabCursor: true,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 2000,
+            },
+        });
+
+
+        var x = 0;
+        var y = 1;
+        var currentActiveSlide = $('.swiper-slide-active .banner-card img').attr('src');
+        $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+
+        mySwiper.on('slideChange', function (e) {
+            x = e.activeIndex;
+            if (y <= x) {
+                var currentActiveSlide = $('.swiper-slide-next .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            else {
+                var currentActiveSlide = $('.swiper-slide-prev .banner-card img').attr('src');
+                $('#current-image').css('background-image', `url(${currentActiveSlide})`);
+            }
+            y = x;
+        });
+
+
+    </script>
+</body>
+
+</html>
